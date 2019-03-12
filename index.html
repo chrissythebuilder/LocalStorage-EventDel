@@ -23,10 +23,14 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <form class="remove-items">
+        <input type="submit" value="- Remove All">
+    </form>
   </div>
 
 <script>
     const addItems = document.querySelector('.add-items');
+    const removeItems = document.querySelector(".remove-items");
     const itemList = document.querySelector('.plates');
     const items = JSON.parse(localStorage.getItem("items")) || [];
 
@@ -67,9 +71,16 @@
         populateList(items, itemList);
     }
 
+    function removeItem(e) {
+    //   stops the page from reloading
+        e.preventDefault();
+        localStorage.clear();
+    }
+
+    
     addItems.addEventListener("submit", addItem);
     itemList.addEventListener("click", toggleDone);
-
+    removeItems.addEventListener("submit", removeItem);
     populateList(items, itemList);
 
 </script>
